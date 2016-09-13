@@ -181,6 +181,10 @@ namespace Rimango.ImageField.Driver
                                 viewModel.CropedWidth,
                                 viewModel.CropedHeight);
 
+                            if(maxDimensions.Height > 0 & maxDimensions.Width > 0) {
+                                target = _imageService.Resize(target, maxDimensions, ResizeType.IgnoreRatio);
+                            }
+
                             newDimensions = new Dimensions(target.Width, target.Height);
 
                             Services.Notifier.Information(T("The image {0} has been cropped to {1}x{2}",
