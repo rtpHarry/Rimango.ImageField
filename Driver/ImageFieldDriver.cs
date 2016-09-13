@@ -209,6 +209,7 @@ namespace Rimango.ImageField.Driver
                                     imageFormat = ImageFormat.Gif;
                                     break;
                                 case ".jpg":
+                                case ".jpeg":
                                     imageFormat = ImageFormat.Jpeg;
                                     break;
                                 default:
