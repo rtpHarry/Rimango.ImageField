@@ -6,6 +6,17 @@ I will add a new feature to allow the user to define the crop area by it's own.
 
 Demo Site (only with CustomForms for the Moment): http://orchard-demos.neuhold.pro/RimangoImageField
 
+
+Version 1.10 (for Orchard 1.10)
+------------------
+
+* Retarget to .net framework 4.5.2
+* Fix out of bounds errors with UserCrop option
+* Change behaviour of UserCrop so that it resize to the original max dimensions
+* Handle possible `.jpeg` file extension
+* Add support for Summary DisplayType
+
+
 Version 1.9 (for Orchard 1.9)
 ------------------
 
