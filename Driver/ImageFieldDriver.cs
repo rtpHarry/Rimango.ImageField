@@ -31,9 +31,7 @@ namespace Rimango.ImageField.Driver
         private const string TokenContentItemId = "{content-item-id}";
 
         private readonly IMediaLibraryService _mediaLibraryService;
-
         private readonly IImageService _imageService;
-
         public IOrchardServices Services { get; set; }
 
         public ImageFieldDriver(
@@ -59,16 +57,25 @@ namespace Rimango.ImageField.Driver
             return field.Name;
         }
 
-        protected override DriverResult Display(ContentPart part, Fields.ImageField field, string displayType, dynamic shapeHelper)
-        {
+        protected override DriverResult Display(ContentPart part, Fields.ImageField field, string displayType, dynamic shapeHelper) {
             var settings = field.PartFieldDefinition.Settings.GetModel<ImageFieldSettings>();
-            return ContentShape("Fields_Rimango_Image", GetDifferentiator(field, part),
+            return Combined(
+                ContentShape("Fields_Rimango_Image", GetDifferentiator(field, part),
                 () =>
-                    shapeHelper.Fields_Rimango_Image( // this is the actual Shape which will be resolved (Fields/Rimango.Image.cshtml)
-                        ContentPart: part, // it will allow to access the content item
+                    shapeHelper.Fields_Rimango_Image(
+                        ContentPart: part,
                         ContentField: field,
                         Settings: settings
                         )
+                ),
+                ContentShape("Fields_Rimango_Image_Summary", GetDifferentiator(field, part),
+                () =>
+                    shapeHelper.Fields_Rimango_Image_Summary(
+                        ContentPart: part,
+                        ContentField: field,
+                        Settings: settings
+                        )
+                )
                 );
         }
 

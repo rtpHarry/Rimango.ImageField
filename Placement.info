@@ -1,13 +1,13 @@
 ﻿<Placement>
-  <Place Fields_Rimango_Image_Edit="Content:2.5"/>
+	<Place Fields_Rimango_Image="Content:before"/>
+	<Place Fields_Rimango_Image_Edit="Content:2.5"/>
 
-  <Match DisplayType="SummaryAdmin">
-    <Place Fields_Rimango_Image="-"/>
-  </Match>
+	<Match DisplayType="Summary">
+		<Place Fields_Rimango_Image="-"/>
+		<Place Fields_Rimango_Image_Summary="Content:10"/>
+	</Match>
 
-  <Match DisplayType="Summary">
-    <Place Fields_Rimango_Image="-"/>
-  </Match>
-
-  <Place Fields_Rimango_Image="Content:before"/>
+	<Match DisplayType="SummaryAdmin">
+		<Place Fields_Rimango_Image="-"/>
+	</Match>
 </Placement>
