@@ -1,21 +1,30 @@
 ﻿@using Orchard.Utility.Extensions
-
+@using Orchard.DisplayManagement.Shapes
 @{
+    if (String.IsNullOrWhiteSpace(Model.ContentField.FileName)) {
+        return;
+    }
+
     Style.Include("Rimango.ImageField.css");
+
     string name = Model.ContentField.Name;
-    
+    var url = (!String.IsNullOrWhiteSpace(Model.ContentField.FileName)) ? Url.Content(Model.ContentField.FileName) : Model.Settings.DefaultImage;
 
-    string url = (!String.IsNullOrWhiteSpace(Model.ContentField.FileName)) ? Url.Content(Model.ContentField.FileName) : Model.Settings.DefaultImage;
-    string width = (!String.IsNullOrWhiteSpace(Model.ContentField.FileName)) ? Model.ContentField.Width.ToString() : "Auto";
-    string height = (!String.IsNullOrWhiteSpace(Model.ContentField.FileName)) ? Model.ContentField.Height.ToString() : "Auto";
-    
+    OrchardTagBuilder imgTagBuilder = new OrchardTagBuilder("img");
 
+    imgTagBuilder.Attributes["src"] = url;
+
+    if (Model.ContentField.Width > 0) {
+        imgTagBuilder.Attributes["width"] = Model.ContentField.Width.ToString();
+    }
+    if (Model.ContentField.Height > 0) {
+        imgTagBuilder.Attributes["height"] = Model.ContentField.Height.ToString();
+    }
+    if (!String.IsNullOrWhiteSpace(Model.ContentField.AlternateText)) {
+        imgTagBuilder.Attributes["alt"] = Model.ContentField.AlternateText;
+    }
 }
-
-@if (!String.IsNullOrWhiteSpace(Model.ContentField.FileName) || !String.IsNullOrWhiteSpace(Model.Settings.DefaultImage))
-{
-    <p class="image-field">
-        <span class="name">@name.CamelFriendly() :</span>
-        <img src="@url" alt="@Model.ContentField.AlternateText" width="@width" height="@height" />
-    </p>
-}
+<p class="image-field">
+    <span class="name">@name.CamelFriendly():</span>
+    @imgTagBuilder.ToHtmlString(TagRenderMode.SelfClosing)
+</p>
